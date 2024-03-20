@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const listingSchema = new Schema({
+const listingSchema = new mongoose.Schema({
     title: {
       type: String,
       required: true,
@@ -8,15 +9,25 @@ const listingSchema = new Schema({
     description: String,
     category: { 
       type: String,
-      enum: ["Beach","Mountain", "Boat", "Cities", "Castles", "Pool", "Camping", "Farm", "Arctic", "Nature", "Treehouse", "Island", "Lighthouse"], 
+      enum: ["Beach","Mountain", "Boat", "Cities", "Castles", "Pool", "Camping", "Farm", "Arctic", "Nature", "Treehouse", "Island", "Lighthouse"],
+      required: true,
     },
     image: {
       url : String,
       filename : String
     },
-    price: Number,
-    location: String,
-    country: String,
+    price: {
+      type: Number,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
     reviews : [
       {
         type : Schema.Types.ObjectId,
@@ -24,24 +35,26 @@ const listingSchema = new Schema({
       }
     ],
     owner : {
-      type : Schema.Types.ObjectId,
+      type : String,
+      required: true,
       ref : "User"
     },
     geometry : {
       type : {
         type : String,
         enum : ["Point"],
-        required : true
+        // required : true
       },
       coordinates : {
         // coordinates are in array format.
         type : [Number],
-        required : true
+        // required : true
       },
     },
     status : {
       type : String,
       required : true,
+      default: "pending",
     }
   });
 

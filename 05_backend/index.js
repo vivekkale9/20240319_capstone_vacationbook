@@ -27,6 +27,14 @@ app.use(bodyParser.json());
 // cors middleware
 app.use(cors())
 
+//import route handlers
+const userRoute = require("./router/userRoute")
+const propertyRoute = require("./router/propertyRoute")
+
+//mount route handlers
+app.use("/users",userRoute)
+app.use("/properties",propertyRoute)
+
 // Connect to MongoDB asynchronously
 const connectToMongoDB = async () => {
     try {
