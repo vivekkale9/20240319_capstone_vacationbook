@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  header,
+  footer {
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header img {
+    width: 40px;
+    height: auto;
+    margin-right: 5px;
+  }
+  
+  header .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  header .logo span {
+    color: #4f80e1; /* Blue color for "No" */
+  }
+  
+  header .admin {
+    display: flex;
+    align-items: center;
+  }
+  
+  .headings {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: 20px;
+  }
+  
+  .main-box {
+    background-color: #ddd;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+  }
+  
+  .column:first-child {
+    flex-basis: 70%;
+  }
+  
+  .rectangle {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 0;
+    flex: 1;
+  }
+  
+  .owner-phone-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+  }
+  
+  .clickable-address {
+    cursor: pointer;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .column:first-child {
+    flex-basis: 100%;
+  }
+  
+  .column:nth-child(3) {
+    display: none;
+  }
+}
