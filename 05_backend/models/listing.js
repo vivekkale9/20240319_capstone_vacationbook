@@ -29,16 +29,20 @@ const listingSchema = new Schema({
     },
     geometry : {
       type : {
-      type : String,
-      enum : ["Point"],
-      required : true
-    },
-    coordinates : {
+        type : String,
+        enum : ["Point"],
+        required : true
+      },
+      coordinates : {
         // coordinates are in array format.
-      type : [Number],
-      required : true
+        type : [Number],
+        required : true
+      },
     },
-  }
+    status : {
+      type : String,
+      required : true,
+    }
   });
 
 // Create the Listing model
