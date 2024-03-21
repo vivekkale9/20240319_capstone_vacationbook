@@ -18,12 +18,10 @@ const reviewSchema = new mongoose.Schema({
   author: {
     type: String,
     required: true,
-    ref: "User",
   },
   propertyID: {
     type: ObjectId,
     required: true,
-    ref: "Property",
   },
 });
 

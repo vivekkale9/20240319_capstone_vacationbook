@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
 const listingSchema = new mongoose.Schema({
   title: {
@@ -45,7 +44,6 @@ const listingSchema = new mongoose.Schema({
   owner: {
     type: String,
     required: true,
-    ref: "User",
   },
   geometry: {
     type: {
