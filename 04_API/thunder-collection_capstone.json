@@ -1,0 +1,447 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "capstone",
+    "dateExported": "2024-03-21T11:18:09.678Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "1e730475-0dcf-4a55-a219-39ac3ca2fa4d",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "signup",
+            "url": "http://localhost:3002/users/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-20T10:29:55.403Z",
+            "modified": "2024-03-20T17:20:24.882Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userName\": \"vivek\",\n  \"email\": \"vivek@gmail.com\",\n  \"mobileNumber\": 9137434484,\n  \"password\": \"vivek1234\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "10c90207-d3a2-428b-b0d3-66b1cb368772",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:3002/users/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-20T11:04:51.478Z",
+            "modified": "2024-03-20T17:20:57.110Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userName\": \"vivek\",\n  \"password\": \"vivek1234\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "475aa631-bf09-40d7-90ab-8591626fb709",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "get user by id",
+            "url": "http://localhost:3002/users/userbyid?userId=65fabff35515cbab01bae05a",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-03-20T11:12:22.177Z",
+            "modified": "2024-03-20T11:13:09.772Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "userId",
+                    "value": "65fabff35515cbab01bae05a",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "6bd6755f-90dc-4fd8-a58a-c5b8c52fb324",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "update user",
+            "url": "http://localhost:3002/users/updateuser?userId=65fabff35515cbab01bae05a",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-03-20T11:19:32.150Z",
+            "modified": "2024-03-20T11:22:11.678Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvYmluQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTMyNzk0LCJleHAiOjE3MTA5MzYzOTR9.1IotY_bWjNnr3M7EpsJP-MVKJmXOXLz23sRYal5FuWg"
+                }
+            ],
+            "params": [
+                {
+                    "name": "userId",
+                    "value": "65fabff35515cbab01bae05a",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userName\" : \"robinAnna\",\n  \"gender\" : \"male\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "98665736-c12e-48f9-89b3-6d6d86ba1481",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "add a new property",
+            "url": "http://localhost:3002/properties/addproperty",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-03-20T11:55:59.501Z",
+            "modified": "2024-03-20T17:16:46.794Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvYmluQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTU0MTY1LCJleHAiOjE3MTA5NTc3NjV9.oydc3iFovJAILBJLfwbj-D2GtCKZB6tMbNoQeaL2kAo"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\" : \"lululul\",\n  \"description\" : \"lululul\",\n  \"category\" : \"Mountain\",\n  \"price\" : 999,\n  \"location\" : \"Pune\",\n  \"country\" : \"India\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "0eb1c68d-6145-4d23-ba50-eaf1c45f545e",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "get all properties",
+            "url": "http://localhost:3002/properties/allproperties",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-03-20T12:10:35.577Z",
+            "modified": "2024-03-20T12:11:08.905Z",
+            "headers": [],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "c60714a2-58e6-4b64-80ce-876ac6708183",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "search property by name",
+            "url": "http://localhost:3002/properties/searchbyname?propertyName=Mountain based camping",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-03-20T16:29:56.335Z",
+            "modified": "2024-03-20T16:31:46.247Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "propertyName",
+                    "value": "Mountain based camping",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "6c2345c3-98bc-4aa3-b3c8-7d0df60b1433",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "get property by id",
+            "url": "http://localhost:3002/properties/propertybyid?propertyID=65fad1b06649465198e63965",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-03-20T17:01:47.666Z",
+            "modified": "2024-03-20T17:03:09.648Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvYmluQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTU0MTY1LCJleHAiOjE3MTA5NTc3NjV9.oydc3iFovJAILBJLfwbj-D2GtCKZB6tMbNoQeaL2kAo"
+                }
+            ],
+            "params": [
+                {
+                    "name": "propertyID",
+                    "value": "65fad1b06649465198e63965",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "a7f99193-ed4d-4d79-ae50-355d65f8bec9",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "update property",
+            "url": "http://localhost:3002/properties/updateproperty?propertyID=65fad1b06649465198e63965",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2024-03-20T17:07:23.371Z",
+            "modified": "2024-03-20T17:11:47.642Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvYmluQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTU0MTY1LCJleHAiOjE3MTA5NTc3NjV9.oydc3iFovJAILBJLfwbj-D2GtCKZB6tMbNoQeaL2kAo"
+                }
+            ],
+            "params": [
+                {
+                    "name": "propertyID",
+                    "value": "65fad1b06649465198e63965",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"description\" : \"I updated the desc\"\n}",
+                "form": []
+            },
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "dc230b75-0502-43ae-aef6-3a2e7c01cf5a",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "delete property",
+            "url": "http://localhost:3002/properties/deleteproperty?propertyID=65fad1b06649465198e63965",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-03-20T17:21:07.474Z",
+            "modified": "2024-03-20T17:28:56.050Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdmVrQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTU1MjU3LCJleHAiOjE3MTA5NTg4NTd9.kZkB8Zoa4vayTonB3P0c97OK4OUx5cF72E2-wzgESGk"
+                }
+            ],
+            "params": [
+                {
+                    "name": "propertyID",
+                    "value": "65fad1b06649465198e63965",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "a03b087c-ef2e-401c-b442-d0e1d9e1aec7",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "post a new review",
+            "url": "http://localhost:3002/reviews/postreview?propertyID=65fad1b06649465198e63965",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-03-21T05:09:19.868Z",
+            "modified": "2024-03-21T05:22:02.139Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdmVrQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTk4NDY4LCJleHAiOjE3MTEwMDIwNjh9.zpAJYDXdpsq3uJBGHiZZuBcYjYn81Qz7PmJsMie-_5w"
+                }
+            ],
+            "params": [
+                {
+                    "name": "propertyID",
+                    "value": "65fad1b06649465198e63965",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"rating\" : 5\n}",
+                "form": []
+            },
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "6bbc062c-d224-46de-86c0-e84416a6b574",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "get reviews by property ID",
+            "url": "http://localhost:3002/reviews/getreviewbypropertyid?propertyID=65fad1b06649465198e63965",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2024-03-21T05:29:37.733Z",
+            "modified": "2024-03-21T05:30:53.997Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdmVrQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTk4NDY4LCJleHAiOjE3MTEwMDIwNjh9.zpAJYDXdpsq3uJBGHiZZuBcYjYn81Qz7PmJsMie-_5w"
+                }
+            ],
+            "params": [
+                {
+                    "name": "propertyID",
+                    "value": "65fad1b06649465198e63965",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "372aeb75-e060-4fa3-b31d-f85e13e18bf7",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "update a review",
+            "url": "http://localhost:3002/reviews/updatereview?reviewID=65fbc42a29944895f10b04fe",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2024-03-21T05:36:50.923Z",
+            "modified": "2024-03-21T05:38:16.433Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdmVrQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTk4NDY4LCJleHAiOjE3MTEwMDIwNjh9.zpAJYDXdpsq3uJBGHiZZuBcYjYn81Qz7PmJsMie-_5w"
+                }
+            ],
+            "params": [
+                {
+                    "name": "reviewID",
+                    "value": "65fbc42a29944895f10b04fe",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"rating\" : 3\n}",
+                "form": []
+            },
+            "reqType": "get",
+            "tests": []
+        },
+        {
+            "_id": "cc0da150-7e33-4d39-a7f8-d90bad1f89d6",
+            "colId": "55f9f084-28fe-45c9-aeff-7bc897cee131",
+            "containerId": "",
+            "name": "delete a review",
+            "url": "http://localhost:3002/reviews/deletereview?reviewID=65fbc42a29944895f10b04fe",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2024-03-21T05:42:12.739Z",
+            "modified": "2024-03-21T05:43:10.138Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdmVrQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzEwOTk4NDY4LCJleHAiOjE3MTEwMDIwNjh9.zpAJYDXdpsq3uJBGHiZZuBcYjYn81Qz7PmJsMie-_5w"
+                }
+            ],
+            "params": [
+                {
+                    "name": "reviewID",
+                    "value": "65fbc42a29944895f10b04fe",
+                    "isPath": false
+                }
+            ],
+            "reqType": "get",
+            "tests": []
+        }
+    ]
+}
