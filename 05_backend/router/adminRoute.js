@@ -8,5 +8,6 @@ const { verifyToken, isAdmin } = require('../middleware/auth');
 router.use(verifyToken,isAdmin)
 router.put('/adminapproval',adminController.approval)
 router.delete('/adminrejection',adminController.rejected)
+router.get('/pendingproperties',adminController.getAllproperties)
 
 module.exports = router;

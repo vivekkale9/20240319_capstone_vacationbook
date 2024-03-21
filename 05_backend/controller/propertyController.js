@@ -9,8 +9,8 @@ const Property = require("../models/listing");
 // API endpoint for getting all properties
 const getAllproperties = async (req, res) => {
   try {
-    // Fetch all properties from the database
-    const properties = await Property.find();
+    // Fetch all the approved properties from the database
+    const properties = await Property.find({ status: "approved" });
 
     // Check if there are no cars found
     if (!properties || properties.length === 0) {
@@ -198,6 +198,9 @@ const deleteProperty =
           message: "You don't have permission to remove this property",
         });
       }
+
+      // Delete all the reviews for that property
+      await Review.deleteMany({ propertyID: propertyID });
 
       // Find the car by its ID and delete it
       const deletedProperty = await Property.findByIdAndDelete(propertyID);
