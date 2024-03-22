@@ -12,7 +12,16 @@ require("dotenv").config();
 // Importing schemas
 const User = require("../models/user");
 
-// API for registering a new user
+/**
+ * Registers a new user.
+ * @param {Object} req - Express request object containing user details in the body.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {MongoError} - If there is a MongoDB error.
+ * @throws {InternalError} - If there is an internal server error.
+ * @throws {AuthorizationError} - If the user is not authorized to access the resource.
+ */
 const register = async (req, res) => {
   try {
     // Extract user details from request body
@@ -46,18 +55,36 @@ const register = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    // Check if the error is a validation error
-    if (
-      error.name === "ValidationError" ||
-      error.message.startsWith("ValidationError")
-    ) {
+    // Handle different error scenarios
+    if (error.name === "ValidationError") {
+      // Handle validation errors
       return res.status(400).json({ error: error.message });
+    } else if (error.code === 11000) {
+      // Handle duplicate key errors (MongoDB specific error)
+      return res.status(409).json({ error: "Email or Phone is already in use." });
+    } else if (error.name === 'MongoError' && error.code === 121) {
+      // Handle document validation errors (MongoDB specific error)
+      return res.status(400).json({ error: error.message });
+    } else if (error.name === 'MongoError') {
+      // Handle other MongoDB errors
+      return res.status(500).json({ error: "Database error" });
+    } else {
+      // Handle other errors with a generic message
+      return res.status(500).json({ error: "Internal Server Error" });
     }
-    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-// API endpoint for user login
+/**
+ * Handles user login.
+ * @param {Object} req - Express request object containing user credentials in the body.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {MongoError} - If there is a MongoDB error.
+ * @throws {InternalError} - If there is an internal server error.
+ * @throws {AuthorizationError} - If the user is not authorized to access the resource.
+ */
 const login = async (req, res) => {
   try {
     const userData = req.body;
@@ -105,11 +132,35 @@ const login = async (req, res) => {
     console.log("success");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // Handle different error scenarios
+    if (error.name === "ValidationError") {
+      // Handle validation errors
+      return res.status(400).json({ error: error.message });
+    } else if (error.code === 11000) {
+      // Handle duplicate key errors (MongoDB specific error)
+      return res.status(409).json({ error: "Email or Phone is already in use." });
+    } else if (error.name === 'MongoError' && error.code === 121) {
+      // Handle document validation errors (MongoDB specific error)
+      return res.status(400).json({ error: error.message });
+    } else if (error.name === 'MongoError') {
+      // Handle other MongoDB errors
+      return res.status(500).json({ error: "Database error" });
+    } else {
+      // Handle other errors with a generic message
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 };
 
-// API endpoint to get user by ID
+/**
+ * Fetches user details by their ID.
+ * @param {Object} req - Express request object containing the user ID in the query parameters.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {CastError} - If the provided user ID has an invalid format.
+ * @throws {InternalError} - If there is an internal server error.
+ */
 const getUserById = async (req, res) => {
   try {
     const { userId } = req.query;
@@ -126,11 +177,30 @@ const getUserById = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // Handle different error scenarios
+    if (error.name === 'ValidationError') {
+      // Handle validation errors
+      return res.status(400).json({ error: error.message });
+    } else if (error.name === 'CastError') {
+      // Handle invalid ID format error
+      return res.status(400).json({ error: "Invalid user ID" });
+    } else {
+      // Handle other errors with a generic message
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 };
 
-// API endpoint to update user
+/**
+ * Updates user information.
+ * @param {Object} verifyToken - Middleware function to verify user token.
+ * @param {Object} req - Express request object containing the user ID in the query parameters and fields to update in the body.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {CastError} - If the provided user ID has an invalid format.
+ * @throws {InternalError} - If there is an internal server error.
+ */
 const updateUser =
   (verifyToken,
   async (req, res) => {
@@ -178,7 +248,16 @@ const updateUser =
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      if (error.name === 'ValidationError') {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === 'CastError') {
+        // Handle invalid ID format error
+        return res.status(400).json({ error: "Invalid user ID" });
+      } else {
+        // Handle other errors with a generic message
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 

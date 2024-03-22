@@ -17,7 +17,7 @@ const validateUser = (userData) => {
   // Validate phone number
   if (mobileNumber) {
     const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(phone_number)) {
+    if (!phoneRegex.test(mobileNumber)) {
       throw new Error("Please provide a valid 10-digit phone number.");
     }
   }

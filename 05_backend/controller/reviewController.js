@@ -8,7 +8,16 @@ require("dotenv").config();
 // Importing schemas
 const Review = require("../models/review");
 
-// API endpoint to post a new review
+/**
+ * Adds a new review for a property.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the property ID in the query and review details in the body.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {AuthorizationError} - If the user is not authorized to post a review.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const newReview =
   (verifyToken,
   async (req, res) => {
@@ -54,12 +63,35 @@ const newReview =
         property: savedReview,
       });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "ValidationError") {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to post a review." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
-// API endpoint to get all reviews by propertyID
+/**
+ * Retrieves reviews for a property by its ID.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the property ID in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const getReviewByPropertyID =
   (verifyToken,
   async (req, res) => {
@@ -85,12 +117,31 @@ const getReviewByPropertyID =
       // Return the car details
       res.status(200).json(review);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "ValidationError") {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
-// API endpoint to update a review
+/**
+ * Updates a review in the database.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the review ID in the query and updated review details in the body.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {AuthorizationError} - If the user is not authorized to update the review.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const updateReview =
   (verifyToken,
   async (req, res) => {
@@ -130,12 +181,35 @@ const updateReview =
       // Return the updated car
       res.status(200).json(updatedReview);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "ValidationError") {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to update this review." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
-// API endpoint to delete review
+/**
+ * Deletes a review from the database.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the review ID in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {AuthorizationError} - If the user is not authorized to delete the review.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const deleteReview =
   (verifyToken,
   async (req, res) => {
@@ -173,8 +247,20 @@ const deleteReview =
       // Return a success message
       res.status(200).json({ message: "Review deleted successfully." });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to delete this review." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 

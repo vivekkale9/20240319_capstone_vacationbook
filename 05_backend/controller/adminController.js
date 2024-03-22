@@ -1,7 +1,15 @@
 const {isAdmin} = require('../middleware/auth')
 const Property = require("../models/listing");
 
-// API endpoint to get all the properties which have pending
+/**
+ * Retrieves all properties from the database with a specified status.
+ * @param {boolean} isAdmin - Indicates whether the user is an admin or not.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {MongoError} - If a MongoDB related error occurs.
+ */
 const getAllproperties = (isAdmin,async (req, res) => {
   try {
     // Fetch all the pending properties from the database
@@ -15,12 +23,29 @@ const getAllproperties = (isAdmin,async (req, res) => {
     // Return the list of cars
     res.status(200).json(properties);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // Handle different error scenarios
+    if (error.name === 'ValidationError') {
+      // Handle validation errors
+      return res.status(400).json({ error: error.message });
+    } else if (error.name === 'MongoError' && error.code === 11000) {
+      // Handle duplicate key error (MongoError with code 11000)
+      return res.status(409).json({ error: "Duplicate property found." });
+    } else {
+      // Handle other errors with a generic message
+      console.log(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 });
 
-// API endpoint to approve the properties
+/**
+ * Approves a property by updating its status to "approved" in the database.
+ * @param {boolean} isAdmin - Indicates whether the user is an admin or not.
+ * @param {Object} req - Express request object containing the property ID in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {CastError} - If the property ID provided is not in a valid format.
+ */
 const approval =
   (isAdmin,
   async (req, res) => {
@@ -47,15 +72,32 @@ const approval =
         property: updatedProperty,
       });
     } catch (error) {
+      // Handle different error scenarios
+    if (error.name === 'CastError') {
+      // Handle invalid propertyID format
+      return res.status(400).json({
+        success: false,
+        message: "Invalid property ID format",
+      });
+    } else {
+      // Handle other errors with a generic message
       console.error(error);
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: "Internal Server Error",
       });
     }
+    }
   });
 
-  // API endpoint to reject the properties
+/**
+ * Removes a property from the database based on the provided property ID.
+ * @param {boolean} isAdmin - Indicates whether the user is an admin or not.
+ * @param {Object} req - Express request object containing the property ID in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {CastError} - If the property ID provided is not in a valid format.
+ */
   const rejected =  (isAdmin, async (req, res) => {
     try {
       const propertyID = req.query.propertyID;
@@ -70,11 +112,20 @@ const approval =
         removedPropertyId: propertyID,
       });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: false,
-        message: "Internal Server Error",
-      });
+      if (error.name === 'CastError') {
+        // Handle invalid propertyID format
+        return res.status(400).json({
+          success: false,
+          message: "Invalid property ID format",
+        });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({
+          success: false,
+          message: "Internal Server Error",
+        });
+      }
     }
   });
   

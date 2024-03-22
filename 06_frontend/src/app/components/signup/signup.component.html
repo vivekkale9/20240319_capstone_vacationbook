@@ -1,14 +1,16 @@
+<app-snackbar></app-snackbar>
 <body>
   <app-navbar></app-navbar>
-
   <div class="container">
     <div class="row mt-3">
       <h1 class="col-6 offset-3">SignUp on VacationBook</h1>
+      
       <div class="col-6 offset-3">
-        <form method="POST" action="/signup" class="needs-validation">
+        <form method="POST" (submit)="onContinueClick()" class="needs-validation">
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input
+              [(ngModel)]="userName"
               name="username"
               id="username"
               type="text"
@@ -20,6 +22,7 @@
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input
+              [(ngModel)]="email"
               name="email"
               id="email"
               type="text"
@@ -31,6 +34,7 @@
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input
+              [(ngModel)]="password"
               name="password"
               id="password"
               type="password"
@@ -42,6 +46,7 @@
           <div class="mb-3">
             <label for="phone" class="form-label">Mobile Number</label>
             <input
+              [(ngModel)]="mobileNumber"
               name="phone"
               id="phone"
               type="number"
@@ -53,6 +58,7 @@
           <div class="mb-3">
             <label for="gender" class="form-label">Gender</label>
             <input
+              [(ngModel)]="gender"
               name="gender"
               id="gender"
               type="text"
@@ -63,6 +69,11 @@
 
           <button class="btn btn-success">SignUp</button>
         </form>
+      </div>
+      <!-- Already a user section with login button -->
+      <div class="already-user">
+        <p style=" margin-bottom: 0px">Already an user?</p>
+        <button class="login-button" routerLink="/login">Login</button>
       </div>
     </div>
   </div>

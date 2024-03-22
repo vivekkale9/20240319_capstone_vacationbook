@@ -6,7 +6,13 @@ const { validateProperty } = require("../validators/propertyValidation");
 // schema imports
 const Property = require("../models/listing");
 
-// API endpoint for getting all properties
+/**
+ * Retrieves all approved properties from the database.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ */
 const getAllproperties = async (req, res) => {
   try {
     // Fetch all the approved properties from the database
@@ -20,12 +26,29 @@ const getAllproperties = async (req, res) => {
     // Return the list of cars
     res.status(200).json(properties);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // Handle different error scenarios
+    if (error.name === "ValidationError") {
+      // Handle validation errors
+      return res.status(400).json({ error: error.message });
+    } else {
+      // Handle other errors with a generic message
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 };
 
-// API endpoint for adding a new property
+/**
+ * Adds a new property to the database.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing property details in the body and user information in the decoded token.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error in the property details.
+ * @throws {AuthorizationError} - If the user is not authorized to add a property.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ * @throws {UnexpectedInputFormatError} - If the input format is unexpected.
+ */
 const addProperty =
   (verifyToken,
   async (req, res) => {
@@ -65,12 +88,38 @@ const addProperty =
         property: savedProperty,
       });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "ValidationError") {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to add a property." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else if (error.name === "UnexpectedInputFormatError") {
+        // Handle unexpected input format errors
+        return res.status(400).json({ error: "Unexpected input format" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
-// API endpoint for searching property by name
+/**
+ * Retrieves properties from the database by their name.
+ * @param {Object} req - Express request object containing the property name in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {MongoError} - If there is a MongoDB related error.
+ * @throws {CastError} - If the property ID provided is not in a valid format.
+ */
 const getPropertyByName = async (req, res) => {
   try {
     // Extract the car model from the query parameters
@@ -96,12 +145,35 @@ const getPropertyByName = async (req, res) => {
     // Return all details of the cars found
     res.status(200).json(property);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // Handle different error scenarios
+    if (error.name === "ValidationError") {
+      // Handle validation errors
+      return res.status(400).json({ error: error.message });
+    } else if (error.name === "MongoError") {
+      // Handle MongoDB errors
+      return res.status(400).json({ error: "MongoDB error" });
+    } else if (error.name === "CastError") {
+      // Handle cast errors (e.g., invalid object ID)
+      return res.status(400).json({ error: "Invalid property ID format" });
+    } else {
+      // Handle other errors with a generic message
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 };
 
-// API endpoint to get property by id
+/**
+ * Retrieves a property from the database by its ID.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the property ID in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {CastError} - If the property ID provided is not in a valid format.
+ * @throws {AuthorizationError} - If the user is not authorized to access the property.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const getPropertyByID =
   (verifyToken,
   async (req, res) => {
@@ -129,12 +201,39 @@ const getPropertyByID =
       // Return all details of the cars found
       res.status(200).json(property);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "ValidationError") {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === "CastError") {
+        // Handle cast errors (e.g., invalid object ID)
+        return res.status(400).json({ error: "Invalid property ID format" });
+      } else if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to access this property." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
-// API endpoint to update property
+/**
+ * Updates a property in the database.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the property ID in the query and updated property details in the body.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {ValidationError} - If there is a validation error.
+ * @throws {AuthorizationError} - If the user is not authorized to update the property.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const updateProperty =
   (verifyToken,
   async (req, res) => {
@@ -174,12 +273,35 @@ const updateProperty =
       // Return the updated car
       res.status(200).json(updatedProperty);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "ValidationError") {
+        // Handle validation errors
+        return res.status(400).json({ error: error.message });
+      } else if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to update this property." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 
-// API endpoint to delete property
+/**
+ * Deletes a property from the database.
+ * @param {Function} verifyToken - Function to verify the authentication token.
+ * @param {Object} req - Express request object containing the property ID in the query.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<void>} - Promise representing the asynchronous operation.
+ * @throws {AuthorizationError} - If the user is not authorized to delete the property.
+ * @throws {DatabaseConnectionError} - If there is an error with the database connection.
+ */
 const deleteProperty =
   (verifyToken,
   async (req, res) => {
@@ -213,8 +335,20 @@ const deleteProperty =
       // Return a success message
       res.status(200).json({ message: "Property deleted successfully." });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      // Handle different error scenarios
+      if (error.name === "AuthorizationError") {
+        // Handle authorization errors
+        return res
+          .status(403)
+          .json({ error: "You are not authorized to delete this property." });
+      } else if (error.name === "DatabaseConnectionError") {
+        // Handle database connection errors
+        return res.status(500).json({ error: "Database connection error" });
+      } else {
+        // Handle other errors with a generic message
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
     }
   });
 

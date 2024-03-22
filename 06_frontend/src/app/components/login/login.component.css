@@ -1,0 +1,7 @@
+.snackbar{
+    position: absolute;
+    margin: auto;
+    top: 20%;
+    /* left: 50%; */
+    z-index: 100;
+}
