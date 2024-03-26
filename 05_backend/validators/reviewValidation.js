@@ -8,8 +8,8 @@ const validateReview = (reviewData) => {
   }
 
   if (rating) {
-    if (typeof rating !== "number" || rating.length > 5) {
-      throw new Error("rating should be a number and less than 5");
+    if ( rating.length > 5) {
+      throw new Error("rating should be less than 5");
     }
   }
 };
