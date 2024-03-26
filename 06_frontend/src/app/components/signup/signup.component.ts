@@ -14,7 +14,7 @@ export class SignupComponent implements AfterViewInit{
 
   userName: string = '';
   email: string = '';
-  mobileNumber: number = 0;
+  mobileNumber: number | null = null;
   password: string = '';
   gender: string = '';
 

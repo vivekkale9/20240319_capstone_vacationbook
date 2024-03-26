@@ -18,4 +18,14 @@ export class SnackbarComponent {
       verticalPosition: 'top', // Vertical position, e.g., 'top', 'bottom'
     });
   }
+
+  showEditSuccessMessage(): void {
+    const horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    const verticalPosition: MatSnackBarVerticalPosition = 'top';
+    this.snackBar.open('Profile Updated Successfully!', 'Close', {
+      duration: 3000, // 3 seconds
+      horizontalPosition: 'center', // Horizontal position, e.g., 'start', 'center', 'end', 'left', 'right'
+      verticalPosition: 'top', // Vertical position, e.g., 'top', 'bottom'
+    });
+  }
 }

@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cloudinary = require('./cloudinary');
 
 //import route handlers
 const userRoute = require("./router/userRoute");
@@ -22,16 +23,18 @@ const app = express();
 const port = process.env.SERVER_PORT;
 
 // Middleware for parsing JSON bodies
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 // Middleware for parsing URL-encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb',extended: true }));
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
 
 // cors middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:4200' // Allow requests from this origin
+}));
 
 //mount route handlers
 app.use("/users", userRoute);

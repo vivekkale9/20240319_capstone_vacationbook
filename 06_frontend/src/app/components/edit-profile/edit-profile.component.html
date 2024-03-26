@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<app-snackbar></app-snackbar>
+<div class="register-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+      <div class="form-group">
+        <label>Username</label>
+        <input
+        type="text"
+        readonly
+          formControlName="userName"
+          class="form-control"
+          [(ngModel)]="userName"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label>Phone No</label>
+        <input
+          type="text"
+          formControlName="mobileNumber"
+          class="form-control"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label>Email</label>
+        <input
+  
+          type="text"
+          readonly
+          formControlName="email"
+          class="form-control"
+          [(ngModel)]="email"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label>Gender</label>
+        <input
+          type="text"
+          formControlName="gender"
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button
+          type="button"
+          (click)="onReset()"
+          class="btn btn-warning float-right"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+  

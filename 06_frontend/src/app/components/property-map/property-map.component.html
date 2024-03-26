@@ -1,0 +1,41 @@
+<div class="col-6 offset-3 mb-3">
+    <h3>Where you'll be :</h3>
+    <div id="map" style="width: 400px; height: 300px">
+      <script>
+        // mapboxgl.accessToken =
+        //   "pk.eyJ1IjoiYm9yYXRlcnVwZXNoNyIsImEiOiJjbHUwM2JreDUwMGVrMmtsZ3F2cmwydzFtIn0.9IHux2DOKYsqHgUzltBx1Q";
+        navigator.geolocation.getCurrentPosition(
+          successLocation,
+          errorLocation,
+          { enableHighAccuracy: true }
+        );
+        function successLocation(position) {
+          console.log(position);
+          setupMap([position.coords.longitude, position.coords.latitude]);
+        }
+        function errorLocation() {
+          setupMap([-2.24, 53.48]);
+        }
+        function setupMap(center) {
+          const map = new mapboxgl.Map({
+            container: "map", // container ID
+            style: "mapbox://styles/mapbox/streets-v12", // style URL
+            zoom: 15, // starting zoom
+            center: center,
+          });
+
+          // To give zoom in and out
+          const nav = new mapboxgl.NavigationControl();
+          map.addControl(nav);
+
+          // To give directions
+          map.addControl(
+            new MapboxDirections({
+              accessToken: mapboxgl.accessToken,
+            }),
+            "top-left"
+          );
+        }
+      </script>
+    </div>
+  </div>

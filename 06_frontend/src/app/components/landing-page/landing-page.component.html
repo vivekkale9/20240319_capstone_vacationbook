@@ -1,11 +1,11 @@
 <body>
-  <app-navbar></app-navbar>
+  <app-navbar (searchResults)="handleSearchResults($event)"></app-navbar>
 
   <div class="container">
-    <app-landing-page-filters></app-landing-page-filters>
+    <app-landing-page-filters (filterSelected)="handleFilterSelected($event)"></app-landing-page-filters>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
       <!-- Your listing card code goes here -->
-      <a *ngFor="let listing of listings" href="#" class="listing-link" data-category="">
+      <a *ngFor="let listing of listingsToDisplay" routerLink="/propertydetails" [queryParams]="{propertyID:listing._id}" class="listing-link" data-category="">
 				<div class="card col listing-card">
 					<img [src]="listing.imageUrl" class="card-img-top" alt="listing_image" style="height: 20rem" />
 					<div class="card-img-overlay"></div>

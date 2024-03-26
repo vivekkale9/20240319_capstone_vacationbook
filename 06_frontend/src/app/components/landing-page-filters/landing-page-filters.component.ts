@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page-filters',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './landing-page-filters.component.css'
 })
 export class LandingPageFiltersComponent {
+  @Output() filterSelected: EventEmitter<string> = new EventEmitter<string>();
 
+  filterByCategory(category: string) {
+    this.filterSelected.emit(category);
+  }
 }

@@ -2,6 +2,8 @@
 const { verifyToken, isAdmin } = require("../middleware/auth");
 require("dotenv").config();
 const { validateProperty } = require("../validators/propertyValidation");
+const cloudinary = require('../cloudinary.js')
+
 
 // schema imports
 const Property = require("../models/listing");
@@ -55,18 +57,23 @@ const addProperty =
     try {
       const userData = req.decoded; // Decoded user information from the token
 
-      // Extract car details from request body
-      const { title, description, category, price, location, country } =
+      // Extract property details from request body
+      const { title, description, category,image,  price, location, country } =
         req.body;
 
-      // validate  inputs
-      const validationError = validateProperty(req.body);
-      if (validationError) {
-        return res.status(400).json({
-          success: false,
-          message: validationError,
-        });
-      }
+        // if(!req.file){
+        //   return res.status(400).json({success:false,message:"no image"})
+        // }
+        console.log("aguhasgajlk"+image);
+
+        
+
+      // const imagePath = image.path
+      // console.log("this issss"+imagePath);
+
+      // Upload image to Cloudinary using the imported configuration
+      const result = await cloudinary.uploader.upload("https://thumbs.dreamstime.com/b/idyllic-summer-landscape-clear-mountain-lake-alps-45054687.jpg")
+      console.log(result);
 
       // create a new property using the property model
       const newProperty = new Property({
@@ -76,6 +83,10 @@ const addProperty =
         price: price,
         location: location,
         country: country,
+        image: {
+          url: result.secure_url,
+          filename: result.original_filename
+        },
         owner: userData.email,
       });
 

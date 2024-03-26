@@ -13,6 +13,13 @@ import { LandingPageFiltersComponent } from './components/landing-page-filters/l
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { AddPropertyComponent } from './components/add-property/add-property.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { PropertyDescriptionComponent } from './components/property-description/property-description.component';
+import { PropertyReviewsComponent } from './components/property-reviews/property-reviews.component';
+import { PropertyMapComponent } from './components/property-map/property-map.component';
+import { PropertyDetailsComponent } from './components/property-details/property-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +30,14 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     SignupComponent,
     LandingPageComponent,
     LandingPageFiltersComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    AddPropertyComponent,
+    DropdownComponent,
+    EditProfileComponent,
+    PropertyDescriptionComponent,
+    PropertyReviewsComponent,
+    PropertyMapComponent,
+    PropertyDetailsComponent
   ],
   imports: [
     BrowserModule,
