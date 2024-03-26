@@ -6,6 +6,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { AddPropertyComponent } from './components/add-property/add-property.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { PropertyDetailsComponent } from './components/property-details/property-details.component';
+import { EditPropertyComponent } from './components/edit-property/edit-property.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path : 'propertydetails',
     component : PropertyDetailsComponent
+  },
+  {
+    path : 'editproperty',
+    component : EditPropertyComponent
   }
 ];
 

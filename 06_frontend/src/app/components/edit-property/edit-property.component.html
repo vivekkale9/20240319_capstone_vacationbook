@@ -1,0 +1,34 @@
+<body>
+    <app-snackbar></app-snackbar>
+    <app-navbar></app-navbar>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-8" offset-2>
+              <h3>Edit your Listing</h3>
+              <form [formGroup]="form"  novalidate class="needs-validation" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input name="listing[title]" type="text" class="form-control" required formControlName="title"/>
+          
+                </div>
+                
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea name="listing[description]" class="form-control" required formControlName="description">
+                    </textarea>
+                </div>
+                
+                <div class="row">
+                  <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input name="listing[price]" type="number" class="form-control" required formControlName="price"/>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-dark edit-btn mt-3 mb-5">Edit</button>
+              </form>
+              
+            </div>
+          </div>
+    </div>
+    <app-footer></app-footer>
+</body>

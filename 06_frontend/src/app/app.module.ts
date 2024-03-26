@@ -20,6 +20,7 @@ import { PropertyDescriptionComponent } from './components/property-description/
 import { PropertyReviewsComponent } from './components/property-reviews/property-reviews.component';
 import { PropertyMapComponent } from './components/property-map/property-map.component';
 import { PropertyDetailsComponent } from './components/property-details/property-details.component';
+import { EditPropertyComponent } from './components/edit-property/edit-property.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PropertyDetailsComponent } from './components/property-details/property
     PropertyDescriptionComponent,
     PropertyReviewsComponent,
     PropertyMapComponent,
-    PropertyDetailsComponent
+    PropertyDetailsComponent,
+    EditPropertyComponent
   ],
   imports: [
     BrowserModule,

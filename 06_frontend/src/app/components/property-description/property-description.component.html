@@ -14,8 +14,8 @@
   </div>
 
   <br />
-  <div class="btns">
-    <a href="#" class="btn btn-dark col-1 offset-3 edit-btn mb-5">Edit</a>
+  <div class="btns" *ngIf="isOwner">
+    <a class="btn btn-dark col-1 offset-3 edit-btn mb-5" routerLink="/editproperty" [queryParams]="{propertyID:property._id}">Edit</a>
 
     <form method="POST" action="#">
       <button class="btn btn-dark offset-5 mb-5">Delete</button>
